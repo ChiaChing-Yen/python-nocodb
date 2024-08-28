@@ -4,14 +4,17 @@ from .nocodb import NocoDBProject
 
 
 class NocoDBAPIUris(Enum):
-    V1_DB_DATA_PREFIX = "api/v1/db/data/"
-    V1_DB_META_PREFIX = "api/v1/db/meta/"
-
+    # V1 is deprecated
+    # V1_DB_DATA_PREFIX = "api/v1/db/data/"
+    # V1_DB_META_PREFIX = "api/v1/db/meta/"
+    V2_DB_DATA_TABLE_PREFIX = "api/v2/db/tables/"
+    V2_DB_DATA_STORAGE_PREFIX = "api/v2/db/storage/"
+    V2_DB_META_PREFIX = "api/v2/db/meta/"
 
 class NocoDBAPI:
     def __init__(self, base_uri: str):
-        self.__base_data_uri = urljoin(base_uri + "/", NocoDBAPIUris.V1_DB_DATA_PREFIX.value)
-        self.__base_meta_uri = urljoin(base_uri + "/", NocoDBAPIUris.V1_DB_META_PREFIX.value)
+        self.__base_data_uri = urljoin(base_uri + "/", NocoDBAPIUris.V2_DB_DATA_TABLE_PREFIX.value)
+        self.__base_meta_uri = urljoin(base_uri + "/", NocoDBAPIUris.V2_DB_META_PREFIX.value)
 
     def get_table_uri(self, project: NocoDBProject, table: str) -> str:
         return urljoin(self.__base_data_uri, "/".join(
